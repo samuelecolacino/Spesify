@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default function HomeScreen() {
+export default function OverviewScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome to Spesify!</Text>
+      <Text style={styles.title}>Overview Screen Placeholder</Text>
     </View>
   );
 }
