@@ -1,10 +1,8 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
-import { useExpenseStore } from '@/src/store/expenseStore';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useEffect } from 'react';
-import { useExpenseStore } from '../src/store/expenseStore';
+import { useExpenseStore } from '@/src/store/expenseStore';
 
 export default function RootLayout() {
   const initialize = useExpenseStore((state) => state.initialize);
