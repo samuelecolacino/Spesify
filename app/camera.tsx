@@ -7,6 +7,7 @@ import { useRef, useState } from 'react';
 import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import uuid from 'react-native-uuid';
+import { useExpenseStore } from '@/src/store/expenseStore';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const FRAME_SIZE = SCREEN_WIDTH * 0.78;
@@ -66,6 +67,7 @@ export default function CameraScreen() {
   const [isFlashOn, setIsFlashOn] = useState(false);
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef<CameraView>(null);
+  const setPendingImage = useExpenseStore((state) => state.setPendingImage);
 
   if (!permission) {
     return <View style={styles.container} />;
@@ -103,15 +105,10 @@ export default function CameraScreen() {
             to: newPath
           });
 
-          // If launched from the create screen, navigate back with the photo URI
-          if (returnTo === 'create') {
-            router.replace({
-              pathname: '/create',
-              params: { photoUri: newPath },
-            });
-          } else {
-            router.back();
-          }
+          setPendingImage(newPath);
+
+          router.back();
+
         } catch (error) {
           console.error("Failed to save image", error);
         }
@@ -127,8 +124,6 @@ export default function CameraScreen() {
         facing={facing}
         enableTorch={isFlashOn}
       />
-
-
 
       <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
         {/* Top: close button */}

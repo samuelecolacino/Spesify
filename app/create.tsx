@@ -20,15 +20,14 @@ import {
 import 'react-native-get-random-values';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { v4 as uuidv4 } from 'uuid';
-import { useExpenseStore } from '../src/store/expenseStore';
+import { useExpenseStore } from '@/src/store/expenseStore';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const IMAGE_SIZE = SCREEN_WIDTH * 0.38;
 
 export default function CreateScreen() {
-  const params = useLocalSearchParams<{ photoUri?: string }>();
 
-  const { categories, addExpense, initialize, isInitialized } = useExpenseStore();
+  const { categories, addExpense, initialize, isInitialized, pendingImage, setPendingImage } = useExpenseStore();
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [name, setName] = useState('');
@@ -46,13 +45,14 @@ export default function CreateScreen() {
 
   // When we come back from the camera with a photo, update the preview
   useEffect(() => {
-    if (params.photoUri) {
-      setImageUri(params.photoUri);
+    if (pendingImage) {
+      setImageUri(pendingImage); // Update local form state
+      setPendingImage(null);     // Clear the global store
     }
-  }, [params.photoUri]);
+  }, [pendingImage]);
 
   function openCamera() {
-    router.push('/camera?returnTo=create');
+    router.push('/camera');
   }
 
   async function handleCreate() {
