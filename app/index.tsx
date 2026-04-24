@@ -1,37 +1,20 @@
-import React, {useMemo, useRef, useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView, SectionList} from 'react-native';
-import { Swipeable } from 'react-native-gesture-handler';
+import React, { useMemo, useEffect, useRef } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  SectionList,
+} from 'react-native';
+import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import {useRouter} from "expo-router";
+import { useRouter } from "expo-router";
 
-interface Expense {
-  id: string;
-  name: string;
-  description: string;
-  price: string;
-  category: string;
-  date: string;
-  imageURI?: string;
-}
-
-const MOCK_DATA: Expense[] = [
-  {
-    id: "1a2b3c4d-5e6f-7g8h-9i0j",
-    name: "Mittagessen im Restaurant",
-    description: "Team-Lunch beim Italiener",
-    price: "24.50",
-    category: "Essen",
-    date: "2026-04-20T12:30:00Z",
-  },
-  {
-    id: "0j9i8h7g-6f5e-4d3c-2b1a",
-    name: "Parkticket Bahnhof",
-    description: "Tageskarte Parkhaus P2",
-    price: "12.00",
-    category: "Parkieren",
-    date: "2026-04-21T08:15:00Z",
-  }
-];
+// 1. Import from your new store and service
+import { useExpenseStore } from '@/src/store/expenseStore';
+import { Expense } from '@/src/services/db';
 
 interface ExpenseItemProps {
   item: Expense;
@@ -100,16 +83,25 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
 export default function OverviewScreen() {
   const router = useRouter();
 
-  const [expenses, setExpenses] = useState<Expense[]>(MOCK_DATA);
+  // 2. Connect to the Store
+  const { expenses, initialize, deleteExpense, isInitialized } = useExpenseStore();
+
+  // 3. Load data from DB on mount
+  useEffect(() => {
+    if (!isInitialized) {
+      initialize();
+    }
+  }, []);
 
   const handleDelete = (id: string) => {
-    setExpenses((prev) => prev.filter((e) => e.id !== id));
+    deleteExpense(id);
   };
 
   const handleEdit = (id: string) => {
     router.push(`/edit/${id}`);
   };
 
+  // 4. Grouping still works the same, but uses store data
   const groupedExpenses = useMemo(() => {
     const map = new Map<string, Expense[]>();
     expenses.forEach((e) => {
@@ -120,46 +112,54 @@ export default function OverviewScreen() {
   }, [expenses]);
 
   return (
-      <SafeAreaView style={styles.container}>
-        {/* Header Section */}
-        <View style={styles.header}>
-          <Text style={styles.title}>Spesify</Text>
-          <Text style={styles.subtitle}>Deine Ausgaben im Überblick</Text>
-        </View>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.title}>Spesify</Text>
+            <Text style={styles.subtitle}>Deine Ausgaben im Überblick</Text>
+          </View>
 
-        {/* Top Add Button Area */}
-        <View style={styles.addButtonContainer}>
-          <TouchableOpacity
-              style={styles.addButton}
-              onPress={() => router.push('/create')}
-          >
-            <Ionicons name="add" size={32} color="#fff" />
-          </TouchableOpacity>
-        </View>
+          <View style={styles.addButtonContainer}>
+            <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => router.push('/create')}
+            >
+              <Ionicons name="add" size={32} color="#fff" />
+            </TouchableOpacity>
+          </View>
 
-        {/* Main List */}
-        <SectionList
-            sections={groupedExpenses}
-            keyExtractor={(item) => item.id}
-            stickySectionHeadersEnabled={false}
-            renderItem={({ item }) => (
-                <ExpenseItem
-                    item={item}
-                    onDelete={handleDelete}
-                    onEdit={handleEdit}
-                />
-            )}
-            renderSectionHeader={({ section: { title } }) => (
-                <Text style={styles.sectionHeader}>{title}</Text>
-            )}
-            contentContainerStyle={styles.listContainer}
-            showsVerticalScrollIndicator={false}
-        />
-      </SafeAreaView>
+          <SectionList
+              sections={groupedExpenses}
+              keyExtractor={(item) => item.id}
+              stickySectionHeadersEnabled={false}
+              renderItem={({ item }) => (
+                  <ExpenseItem
+                      item={item}
+                      onDelete={handleDelete}
+                      onEdit={handleEdit}
+                  />
+              )}
+              renderSectionHeader={({ section: { title } }) => (
+                  <Text style={styles.sectionHeader}>{title}</Text>
+              )}
+              contentContainerStyle={styles.listContainer}
+              showsVerticalScrollIndicator={false}
+              ListEmptyComponent={
+                <View style={styles.emptyState}>
+                  <Text style={styles.subtitle}>Noch keine Ausgaben erfasst.</Text>
+                </View>
+              }
+          />
+        </SafeAreaView>
+      </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
+  emptyState: {
+    alignItems: 'center',
+    marginTop: 50,
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',
