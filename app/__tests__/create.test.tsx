@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { Alert } from 'react-native';
 import CreateScreen from '../create';
 import { useExpenseStore } from '../../src/store/expenseStore';
 import { router } from 'expo-router';
@@ -50,7 +51,7 @@ describe('CreateScreen', () => {
 
   it('shows an alert if required fields are missing', async () => {
     // We need to mock Alert
-    const spyAlert = jest.spyOn(require('react-native').Alert, 'alert');
+    const spyAlert = jest.spyOn(Alert, 'alert');
 
     const { getByText } = render(
       <SafeAreaProvider>
