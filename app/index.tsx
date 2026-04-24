@@ -12,7 +12,6 @@ import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
 
-// 1. Import from your new store and service
 import { useExpenseStore } from '@/src/store/expenseStore';
 import { Expense } from '@/src/services/db';
 
@@ -53,7 +52,11 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
           renderRightActions={renderRightActions}
           onSwipeableOpen={handleSwipeableOpen}
       >
-        <View style={styles.itemContainer}>
+        <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => onEdit(item.id)}
+            style={styles.itemContainer}
+        >
           {item.imageURI ? (
               <Image source={{ uri: item.imageURI }} style={styles.itemImage} />
           ) : (
@@ -75,7 +78,7 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
               <Ionicons name="trash-outline" size={20} color="#ff3333" />
             </TouchableOpacity>
           </View>
-        </View>
+        </TouchableOpacity>
       </Swipeable>
   );
 };
@@ -83,10 +86,8 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
 export default function OverviewScreen() {
   const router = useRouter();
 
-  // 2. Connect to the Store
   const { expenses, initialize, deleteExpense, isInitialized } = useExpenseStore();
 
-  // 3. Load data from DB on mount
   useEffect(() => {
     if (!isInitialized) {
       initialize();
@@ -101,7 +102,6 @@ export default function OverviewScreen() {
     router.push(`/edit/${id}`);
   };
 
-  // 4. Grouping still works the same, but uses store data
   const groupedExpenses = useMemo(() => {
     const map = new Map<string, Expense[]>();
     expenses.forEach((e) => {
@@ -116,7 +116,6 @@ export default function OverviewScreen() {
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.title}>Spesify</Text>
-            <Text style={styles.subtitle}>Deine Ausgaben im Überblick</Text>
           </View>
 
           <View style={styles.addButtonContainer}>
