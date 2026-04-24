@@ -130,6 +130,7 @@ export default function CreateScreen() {
                 value={name}
                 onChangeText={setName}
                 returnKeyType="next"
+                testID="input-name"
               />
               <TextInput
                 style={styles.textInput}
@@ -139,6 +140,7 @@ export default function CreateScreen() {
                 onChangeText={setPrice}
                 keyboardType="decimal-pad"
                 returnKeyType="done"
+                testID="input-price"
               />
             </View>
           </View>
@@ -148,6 +150,7 @@ export default function CreateScreen() {
             style={styles.pickerTrigger}
             onPress={() => setShowCategoryPicker(true)}
             activeOpacity={0.7}
+            testID="category-trigger"
           >
             <Text style={category ? styles.pickerText : styles.pickerPlaceholder}>
               {category || 'Kategorie wählen'}
@@ -221,6 +224,7 @@ export default function CreateScreen() {
             style={styles.createButton}
             onPress={handleCreate}
             activeOpacity={0.8}
+            testID="button-create"
           >
             <Text style={styles.createButtonText}>Create</Text>
           </TouchableOpacity>
