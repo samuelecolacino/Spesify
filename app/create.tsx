@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { Image } from 'expo-image';
-import { router, useLocalSearchParams } from 'expo-router';
+import { Stack, router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import {
   Alert,
@@ -71,11 +71,23 @@ export default function CreateScreen() {
       imageURI: imageUri ?? undefined,
     });
 
-    router.back();
+    router.replace('/');
   }
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['bottom']}>
+      <Stack.Screen
+        options={{
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => router.replace('/')}
+              style={{ marginLeft: 0, padding: 8 }}
+            >
+              <Ionicons name="arrow-back" size={24} color="#fff" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
