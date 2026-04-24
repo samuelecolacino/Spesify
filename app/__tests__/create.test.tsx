@@ -3,7 +3,11 @@ import { render, fireEvent, waitFor } from '@testing-library/react-native';
 <<<<<<< HEAD
 import { Alert } from 'react-native';
 =======
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 import CreateScreen from '../create';
 import { useExpenseStore } from '../../src/store/expenseStore';
 import { router } from 'expo-router';
@@ -18,7 +22,11 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 =======
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 // Mock the store
 jest.mock('../../src/store/expenseStore', () => ({
   useExpenseStore: jest.fn(),
@@ -72,7 +80,11 @@ describe('CreateScreen', () => {
     const spyAlert = jest.spyOn(require('react-native').Alert, 'alert');
 
     const { getByText } = render(
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
       <SafeAreaProvider>
         <CreateScreen />
       </SafeAreaProvider>
@@ -81,7 +93,11 @@ describe('CreateScreen', () => {
     const createButton = getByTestId('button-create');
 =======
     const createButton = getByText('Create');
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 
     fireEvent.press(createButton);
 
@@ -97,7 +113,11 @@ describe('CreateScreen', () => {
     const { getByTestId, getByText } = render(
 =======
     const { getByPlaceholderText, getByText } = render(
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
       <SafeAreaProvider>
         <CreateScreen />
       </SafeAreaProvider>
@@ -124,7 +144,11 @@ describe('CreateScreen', () => {
 
     // Submit
     fireEvent.press(getByText('Create'));
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 
     await waitFor(() => {
       expect(mockAddExpense).toHaveBeenCalledWith(
@@ -162,5 +186,9 @@ describe('CreateScreen', () => {
     expect(mockAddExpense).not.toHaveBeenCalled();
   });
 =======
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 });

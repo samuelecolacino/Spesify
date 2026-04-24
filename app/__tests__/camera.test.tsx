@@ -13,7 +13,11 @@ jest.mock('react-native-safe-area-context', () => ({
 }));
 
 =======
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 // Mock expo-camera
 jest.mock('expo-camera', () => ({
   useCameraPermissions: jest.fn(),
@@ -96,5 +100,9 @@ describe('CameraScreen', () => {
     expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
   });
 =======
+<<<<<<< HEAD
 >>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
+=======
+>>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
+>>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 });
