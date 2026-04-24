@@ -35,6 +35,7 @@ export const useExpenseStore = create<ExpenseState>((set) => ({
       await initDb();
       const expenses = await loadExpensesFromDb();
       const categories = await loadCategoriesFromDb();
+      await seedDb();
       set({ expenses, categories, isInitialized: true });
     } catch (error) {
       console.error('Failed to initialize database:', error);
