@@ -14,9 +14,15 @@ export default function RootLayout() {
   return (
     <>
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerStyle: { backgroundColor: '#000' },
+          headerTintColor: '#fff',
+        }}
+      >
         <Stack.Screen name="index" options={{ title: 'Spesify' }} />
-        <Stack.Screen name="camera" options={{ title: 'Camera', presentation: 'fullScreenModal' }} />
+        <Stack.Screen name="create" options={{ title: 'Neu erstellen' }} />
+        <Stack.Screen name="camera" options={{ headerShown: false, presentation: 'fullScreenModal' }} />
       </Stack>
       <StatusBar style="auto" />
     </GestureHandlerRootView>

@@ -1,19 +1,18 @@
-import React, { useMemo, useEffect, useRef } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  SafeAreaView,
-  SectionList,
-} from 'react-native';
-import { Swipeable, GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from "expo-router";
+import React, { useEffect, useMemo, useRef } from 'react';
+import {
+  Image,
+  SectionList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { useExpenseStore } from '@/src/store/expenseStore';
 import { Expense } from '@/src/services/db';
+import { useExpenseStore } from '@/src/store/expenseStore';
 
 interface ExpenseItemProps {
   item: Expense;
@@ -25,15 +24,15 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
   const swipeableRef = useRef<Swipeable>(null);
 
   const renderLeftActions = () => (
-      <View style={styles.rightAction}>
-        <Ionicons name="trash-outline" size={24} color="#ffffff" />
-      </View>
+    <View style={styles.rightAction}>
+      <Ionicons name="trash-outline" size={24} color="#ffffff" />
+    </View>
   );
 
   const renderRightActions = () => (
-      <View style={styles.leftAction}>
-        <Text style={styles.actionText}>Edit</Text>
-      </View>
+    <View style={styles.leftAction}>
+      <Text style={styles.actionText}>Edit</Text>
+    </View>
   );
 
   const handleSwipeableOpen = (direction: 'left' | 'right') => {
@@ -46,40 +45,40 @@ const ExpenseItem = ({ item, onDelete, onEdit }: ExpenseItemProps) => {
   };
 
   return (
-      <Swipeable
-          ref={swipeableRef}
-          renderLeftActions={renderLeftActions}
-          renderRightActions={renderRightActions}
-          onSwipeableOpen={handleSwipeableOpen}
+    <Swipeable
+      ref={swipeableRef}
+      renderLeftActions={renderLeftActions}
+      renderRightActions={renderRightActions}
+      onSwipeableOpen={handleSwipeableOpen}
+    >
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => onEdit(item.id)}
+        style={styles.itemContainer}
       >
-        <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => onEdit(item.id)}
-            style={styles.itemContainer}
-        >
-          {item.imageURI ? (
-              <Image source={{ uri: item.imageURI }} style={styles.itemImage} />
-          ) : (
-              <View style={styles.imagePlaceholder}>
-                <Ionicons name="receipt-outline" size={24} color="#666" />
-              </View>
-          )}
-
-          <View style={styles.itemDetails}>
-            <Text style={styles.itemName}>{item.name}</Text>
-            <Text style={styles.itemDescription} numberOfLines={1}>
-              {item.description}
-            </Text>
+        {item.imageURI ? (
+          <Image source={{ uri: item.imageURI }} style={styles.itemImage} />
+        ) : (
+          <View style={styles.imagePlaceholder}>
+            <Ionicons name="receipt-outline" size={24} color="#666" />
           </View>
+        )}
 
-          <View style={styles.itemEnd}>
-            <Text style={styles.itemPrice}>{item.price} $</Text>
-            <TouchableOpacity onPress={() => onDelete(item.id)}>
-              <Ionicons name="trash-outline" size={20} color="#ff3333" />
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Swipeable>
+        <View style={styles.itemDetails}>
+          <Text style={styles.itemName}>{item.name}</Text>
+          <Text style={styles.itemDescription} numberOfLines={1}>
+            {item.description}
+          </Text>
+        </View>
+
+        <View style={styles.itemEnd}>
+          <Text style={styles.itemPrice}>{item.price} $</Text>
+          <TouchableOpacity onPress={() => onDelete(item.id)}>
+            <Ionicons name="trash-outline" size={20} color="#ff3333" />
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    </Swipeable>
   );
 };
 
@@ -112,44 +111,42 @@ export default function OverviewScreen() {
   }, [expenses]);
 
   return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <SafeAreaView style={styles.container}>
-          <View style={styles.header}>
-            <Text style={styles.title}>Spesify</Text>
-          </View>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Spesify</Text>
+      </View>
 
-          <View style={styles.addButtonContainer}>
-            <TouchableOpacity
-                style={styles.addButton}
-                onPress={() => router.push('/create')}
-            >
-              <Ionicons name="add" size={32} color="#fff" />
-            </TouchableOpacity>
-          </View>
-          <SectionList
-              sections={groupedExpenses}
-              keyExtractor={(item) => item.id}
-              stickySectionHeadersEnabled={false}
-              renderItem={({ item }) => (
-                  <ExpenseItem
-                      item={item}
-                      onDelete={handleDelete}
-                      onEdit={handleEdit}
-                  />
-              )}
-              renderSectionHeader={({ section: { title } }) => (
-                  <Text style={styles.sectionHeader}>{title}</Text>
-              )}
-              contentContainerStyle={styles.listContainer}
-              showsVerticalScrollIndicator={false}
-              ListEmptyComponent={
-                <View style={styles.emptyState}>
-                  <Text style={styles.subtitle}>Noch keine Ausgaben erfasst.</Text>
-                </View>
-              }
+      <View style={styles.addButtonContainer}>
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => router.push('/create')}
+        >
+          <Ionicons name="add" size={32} color="#fff" />
+        </TouchableOpacity>
+      </View>
+      <SectionList
+        sections={groupedExpenses}
+        keyExtractor={(item) => item.id}
+        stickySectionHeadersEnabled={false}
+        renderItem={({ item }) => (
+          <ExpenseItem
+            item={item}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
           />
-        </SafeAreaView>
-      </GestureHandlerRootView>
+        )}
+        renderSectionHeader={({ section: { title } }) => (
+          <Text style={styles.sectionHeader}>{title}</Text>
+        )}
+        contentContainerStyle={styles.listContainer}
+        showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <View style={styles.emptyState}>
+            <Text style={styles.subtitle}>Noch keine Ausgaben erfasst.</Text>
+          </View>
+        }
+      />
+    </SafeAreaView>
   );
 }
 

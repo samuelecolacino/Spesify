@@ -35,7 +35,7 @@ export async function initDb() {
 
 export async function loadCategoriesFromDb(): Promise<string[]> {
   const database = await getDb();
-  const result = await database.getAllAsync<{name: string}>('SELECT name FROM categories ORDER BY name ASC;');
+  const result = await database.getAllAsync<{ name: string }>('SELECT name FROM categories ORDER BY name ASC;');
   return result.map(r => r.name);
 }
 
@@ -88,6 +88,15 @@ export async function updateExpenseInDb(expense: Expense) {
 }
 
 export async function deleteExpenseFromDb(id: string) {
+  if (!id) {
+    console.error('deleteExpenseFromDb: No ID provided');
+    return;
+  }
   const database = await getDb();
-  await database.runAsync('DELETE FROM expenses WHERE id = ?', [id]);
+  try {
+    await database.runAsync(`DELETE FROM expenses WHERE id = ?`, [id]);
+  } catch (error) {
+    console.error('Error in deleteExpenseFromDb:', error);
+    throw error;
+  }
 }
