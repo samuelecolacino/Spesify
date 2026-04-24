@@ -35,7 +35,7 @@ export async function initDb() {
 
 export async function loadCategoriesFromDb(): Promise<string[]> {
   const database = await getDb();
-  const result = await database.getAllAsync<{name: string}>('SELECT name FROM categories ORDER BY name ASC;');
+  const result = await database.getAllAsync<{ name: string }>('SELECT name FROM categories ORDER BY name ASC;');
   return result.map(r => r.name);
 }
 
