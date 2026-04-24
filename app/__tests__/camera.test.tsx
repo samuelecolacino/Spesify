@@ -4,7 +4,6 @@ import CameraScreen from '../camera';
 import { useCameraPermissions } from 'expo-camera';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-<<<<<<< HEAD
 // Mock react-native-safe-area-context
 jest.mock('react-native-safe-area-context', () => ({
   SafeAreaProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
@@ -12,12 +11,6 @@ jest.mock('react-native-safe-area-context', () => ({
   useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
 }));
 
-=======
-<<<<<<< HEAD
->>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
-=======
->>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
->>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 // Mock expo-camera
 jest.mock('expo-camera', () => ({
   useCameraPermissions: jest.fn(),
@@ -57,9 +50,9 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
 
     expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
@@ -74,16 +67,15 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
     const button = getByText('Zugriff erlauben');
 
     fireEvent.press(button);
     expect(requestPermission).toHaveBeenCalled();
   });
-<<<<<<< HEAD
 
   it('still renders permission screen when permission is denied and cannot be asked again', () => {
     (useCameraPermissions as jest.Mock).mockReturnValue([
@@ -92,17 +84,11 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
 
     expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
   });
-=======
-<<<<<<< HEAD
->>>>>>> a137587 (feat: add unit tests for camera and create screens and update app logo)
-=======
->>>>>>> 4d20c5a (feat: add unit tests for camera and create screens and update app logo)
->>>>>>> 8c822e9 (feat: add unit tests for camera and create screens and update app logo)
 });
