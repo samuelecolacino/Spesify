@@ -4,6 +4,13 @@ import CameraScreen from '../camera';
 import { useCameraPermissions } from 'expo-camera';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// Mock react-native-safe-area-context
+jest.mock('react-native-safe-area-context', () => ({
+  SafeAreaProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
+}));
+
 // Mock expo-camera
 jest.mock('expo-camera', () => ({
   useCameraPermissions: jest.fn(),
@@ -68,5 +75,20 @@ describe('CameraScreen', () => {
 
     fireEvent.press(button);
     expect(requestPermission).toHaveBeenCalled();
+  });
+
+  it('still renders permission screen when permission is denied and cannot be asked again', () => {
+    (useCameraPermissions as jest.Mock).mockReturnValue([
+      { granted: false, canAskAgain: false },
+      jest.fn(),
+    ]);
+
+    const { getByText } = render(
+      <SafeAreaProvider>
+        <CameraScreen />
+      </SafeAreaProvider>
+    );
+
+    expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
   });
 });

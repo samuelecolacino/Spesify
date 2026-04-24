@@ -6,6 +6,13 @@ import { useExpenseStore } from '../../src/store/expenseStore';
 import { router } from 'expo-router';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// Mock react-native-safe-area-context
+jest.mock('react-native-safe-area-context', () => ({
+  SafeAreaProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  SafeAreaView: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+  useSafeAreaInsets: () => ({ top: 0, right: 0, bottom: 0, left: 0 }),
+}));
+
 // Mock the store
 jest.mock('../../src/store/expenseStore', () => ({
   useExpenseStore: jest.fn(),
@@ -53,12 +60,12 @@ describe('CreateScreen', () => {
     // We need to mock Alert
     const spyAlert = jest.spyOn(Alert, 'alert');
 
-    const { getByText } = render(
+    const { getByTestId } = render(
       <SafeAreaProvider>
         <CreateScreen />
       </SafeAreaProvider>
     );
-    const createButton = getByText('Create');
+    const createButton = getByTestId('button-create');
 
     fireEvent.press(createButton);
 
@@ -70,22 +77,22 @@ describe('CreateScreen', () => {
   });
 
   it('calls addExpense and navigates back on valid submission', async () => {
-    const { getByPlaceholderText, getByText } = render(
+    const { getByTestId, getByText } = render(
       <SafeAreaProvider>
         <CreateScreen />
       </SafeAreaProvider>
     );
 
     // Fill inputs
-    fireEvent.changeText(getByPlaceholderText('Name'), 'Lunch');
-    fireEvent.changeText(getByPlaceholderText('Price'), '15.50');
+    fireEvent.changeText(getByTestId('input-name'), 'Lunch');
+    fireEvent.changeText(getByTestId('input-price'), '15.50');
 
     // Select category (this involves opening the modal)
-    fireEvent.press(getByText('Kategorie wählen'));
+    fireEvent.press(getByTestId('category-trigger'));
     fireEvent.press(getByText('Food'));
 
     // Submit
-    fireEvent.press(getByText('Create'));
+    fireEvent.press(getByTestId('button-create'));
 
     await waitFor(() => {
       expect(mockAddExpense).toHaveBeenCalledWith(
@@ -97,5 +104,28 @@ describe('CreateScreen', () => {
       );
       expect(router.replace).toHaveBeenCalledWith('/');
     });
+  });
+
+  it('shows an alert if price is empty', async () => {
+    const spyAlert = jest.spyOn(Alert, 'alert');
+    const { getByTestId, getByText } = render(
+      <SafeAreaProvider>
+        <CreateScreen />
+      </SafeAreaProvider>
+    );
+
+    fireEvent.changeText(getByTestId('input-name'), 'Lunch');
+    // Price stays empty
+
+    fireEvent.press(getByTestId('category-trigger'));
+    fireEvent.press(getByText('Food'));
+
+    fireEvent.press(getByTestId('button-create'));
+
+    expect(spyAlert).toHaveBeenCalledWith(
+      'Fehlende Angaben',
+      'Bitte Name, Preis und Kategorie ausfüllen.'
+    );
+    expect(mockAddExpense).not.toHaveBeenCalled();
   });
 });
