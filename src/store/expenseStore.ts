@@ -8,6 +8,7 @@ import {
   updateExpenseInDb,
   deleteExpenseFromDb
 } from '../services/db';
+import { seedDb } from '../services/dbSeeds';
 
 interface ExpenseState {
   expenses: Expense[];
