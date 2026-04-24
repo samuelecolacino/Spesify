@@ -135,9 +135,15 @@ export default function OverviewScreen() {
             onEdit={handleEdit}
           />
         )}
-        renderSectionHeader={({ section: { title } }) => (
-          <Text style={styles.sectionHeader}>{title}</Text>
-        )}
+        renderSectionHeader={({ section: { title, data } }) => {
+          const total = data.reduce((sum, item) => sum + parseFloat(item.price || '0'), 0);
+          return (
+            <View style={styles.sectionHeaderContainer}>
+              <Text style={styles.sectionHeader}>{title}</Text>
+              <Text style={styles.sectionTotal}>{total.toFixed(2)} $</Text>
+            </View>
+          );
+        }}
         contentContainerStyle={styles.listContainer}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={
@@ -180,13 +186,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 100,
   },
+  sectionHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+    marginBottom: 10,
+    paddingHorizontal: 5,
+  },
   sectionHeader: {
     color: '#4ea8de',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 10,
-    marginTop: 10,
-    paddingLeft: 5,
+  },
+  sectionTotal: {
+    color: 'rgba(255, 255, 255, 0.5)',
+    fontSize: 16,
+    fontWeight: '600',
   },
   itemContainer: {
     flexDirection: 'row',
