@@ -16,6 +16,7 @@ import { useRouter } from "expo-router";
 import { useExpenseStore } from '@/src/store/expenseStore';
 import { Expense } from '@/src/services/db';
 
+
 interface ExpenseItemProps {
   item: Expense;
   onDelete: (id: string) => void;
@@ -112,6 +113,7 @@ export default function OverviewScreen() {
   }, [expenses]);
 
   return (
+
       <GestureHandlerRootView style={{ flex: 1 }}>
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
