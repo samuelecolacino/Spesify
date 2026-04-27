@@ -61,26 +61,26 @@ describe('CreateScreen', () => {
     const spyAlert = jest.spyOn(Alert, 'alert');
 
     const { getByTestId } = render(
-      <SafeAreaProvider>
-        <CreateScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CreateScreen />
+        </SafeAreaProvider>
     );
     const createButton = getByTestId('button-create');
 
     fireEvent.press(createButton);
 
     expect(spyAlert).toHaveBeenCalledWith(
-      'Fehlende Angaben',
-      'Bitte Name, Preis und Kategorie ausfüllen.'
+        'Fehlende Angaben',
+        'Bitte Name, Preis und Kategorie ausfüllen.'
     );
     expect(mockAddExpense).not.toHaveBeenCalled();
   });
 
   it('calls addExpense and navigates back on valid submission', async () => {
     const { getByTestId, getByText } = render(
-      <SafeAreaProvider>
-        <CreateScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CreateScreen />
+        </SafeAreaProvider>
     );
 
     // Fill inputs
@@ -96,11 +96,11 @@ describe('CreateScreen', () => {
 
     await waitFor(() => {
       expect(mockAddExpense).toHaveBeenCalledWith(
-        expect.objectContaining({
-          name: 'Lunch',
-          price: '15.50',
-          category: 'Food',
-        })
+          expect.objectContaining({
+            name: 'Lunch',
+            price: '15.50',
+            category: 'Food',
+          })
       );
       expect(router.replace).toHaveBeenCalledWith('/');
     });
@@ -109,9 +109,9 @@ describe('CreateScreen', () => {
   it('shows an alert if price is empty', async () => {
     const spyAlert = jest.spyOn(Alert, 'alert');
     const { getByTestId, getByText } = render(
-      <SafeAreaProvider>
-        <CreateScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CreateScreen />
+        </SafeAreaProvider>
     );
 
     fireEvent.changeText(getByTestId('input-name'), 'Lunch');
@@ -123,8 +123,8 @@ describe('CreateScreen', () => {
     fireEvent.press(getByTestId('button-create'));
 
     expect(spyAlert).toHaveBeenCalledWith(
-      'Fehlende Angaben',
-      'Bitte Name, Preis und Kategorie ausfüllen.'
+        'Fehlende Angaben',
+        'Bitte Name, Preis und Kategorie ausfüllen.'
     );
     expect(mockAddExpense).not.toHaveBeenCalled();
   });

@@ -50,9 +50,9 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
 
     expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
@@ -67,9 +67,9 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
     const button = getByText('Zugriff erlauben');
 
@@ -84,9 +84,9 @@ describe('CameraScreen', () => {
     ]);
 
     const { getByText } = render(
-      <SafeAreaProvider>
-        <CameraScreen />
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <CameraScreen />
+        </SafeAreaProvider>
     );
 
     expect(getByText('Kamerazugriff benötigt')).toBeTruthy();
