@@ -1,7 +1,7 @@
 import React from 'react';
 import {render, fireEvent, screen, waitFor} from '@testing-library/react-native';
-import EditScreen from '@/app/edit/[id]';
 import {useExpenseStore} from '@/src/store/expenseStore';
+import EditScreen from '@/app/edit/[id]';
 import {useLocalSearchParams, useRouter} from 'expo-router';
 import {Alert} from 'react-native';
 
