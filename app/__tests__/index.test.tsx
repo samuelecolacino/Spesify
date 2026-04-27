@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react-native';
-import OverviewScreen from '@/app/index'; // Adjust path as needed
+import OverviewScreen from '@/app/index';
 import { useExpenseStore } from '@/src/store/expenseStore';
 import { useRouter } from 'expo-router';
 
@@ -18,7 +18,6 @@ jest.mock('@expo/vector-icons', () => {
     return { Ionicons: (props: any) => <View testID={`icon-${props.name}`} /> };
 });
 
-// Mock for Swipeable to allow pressing its children
 jest.mock('react-native-gesture-handler', () => {
     const { View } = require('react-native');
     return {
@@ -55,7 +54,6 @@ describe('OverviewScreen (index.tsx)', () => {
         jest.clearAllMocks();
         (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
 
-        // Default Store Mock
         (useExpenseStore as unknown as jest.Mock).mockReturnValue({
             expenses: mockExpenses,
             initialize: mockInitialize,
@@ -69,7 +67,7 @@ describe('OverviewScreen (index.tsx)', () => {
             expenses: [],
             initialize: mockInitialize,
             deleteExpense: mockDeleteExpense,
-            isInitialized: false, // Force initialization
+            isInitialized: false,
         });
 
         render(<OverviewScreen />);
@@ -90,19 +88,15 @@ describe('OverviewScreen (index.tsx)', () => {
     it('rendert die gruppierten Expenses korrekt', () => {
         render(<OverviewScreen />);
 
-        // 1. Check Categories
         expect(screen.getByText('Lebensmittel')).toBeTruthy();
         expect(screen.getByText('Transport')).toBeTruthy();
 
-        // 2. Check Item Names
         expect(screen.getByText('Migros')).toBeTruthy();
         expect(screen.getByText('SBB Ticket')).toBeTruthy();
 
-        // 3. Handle Duplicate Prices for Lebensmittel (Item + Total)
         const lebensmittelPrices = screen.getAllByText('25.50 $');
         expect(lebensmittelPrices.length).toBe(2);
 
-        // 4. Handle Duplicate Prices for Transport (Item + Total)
         const transportPrices = screen.getAllByText('40.00 $');
         expect(transportPrices.length).toBe(2);
     });
@@ -128,7 +122,6 @@ describe('OverviewScreen (index.tsx)', () => {
     it('ruft deleteExpense auf, wenn auf das Mülleimer-Icon geklickt wird', () => {
         render(<OverviewScreen />);
 
-        // Grab the first trash icon (inside the itemEnd view)
         const trashIcons = screen.getAllByTestId('icon-trash-outline');
         fireEvent.press(trashIcons[0].parent);
 
