@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/images/app-icon.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.samuelecolacinp.spesify"
     },
     "web": {
       "output": "static",
@@ -47,6 +48,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "c1b27138-3b46-4254-8a80-2eb354d61745"
+      }
     }
   }
 }
