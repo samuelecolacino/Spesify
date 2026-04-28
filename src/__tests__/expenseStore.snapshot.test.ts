@@ -10,9 +10,6 @@ jest.mock('../services/db', () => ({
   deleteExpenseFromDb: jest.fn(),
 }));
 
-jest.mock('../services/dbSeeds', () => ({
-  seedDb: jest.fn(),
-}));
 
 import {
   loadExpensesFromDb,
