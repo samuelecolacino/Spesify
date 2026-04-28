@@ -61,6 +61,20 @@ describe('EditScreen (edit/[id].tsx)', () => {
         });
     });
 
+    it('matches the snapshot in View Mode', () => {
+        const { toJSON } = render(<EditScreen />);
+        expect(toJSON()).toMatchSnapshot();
+    });
+
+    it('matches the snapshot in Edit Mode', () => {
+        const { toJSON, getByText } = render(<EditScreen />);
+
+        // Toggle Edit Mode to see the Save button and enabled inputs in the snapshot
+        fireEvent.press(getByText('Edit'));
+
+        expect(toJSON()).toMatchSnapshot();
+    });
+
     it('lädt die Expense-Daten basierend auf der ID', () => {
         render(<EditScreen/>);
 

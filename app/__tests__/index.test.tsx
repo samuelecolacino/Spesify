@@ -5,6 +5,19 @@ import { useExpenseStore } from '@/src/store/expenseStore';
 import { useRouter } from 'expo-router';
 
 // --- Mocks ---
+
+jest.mock('react-native-safe-area-context', () => {
+    const React = require('react');
+    const { View } = require('react-native');
+    return {
+        SafeAreaProvider: ({ children }: any) => children,
+        SafeAreaView: ({ children, style }: any) => (
+            <View style={style} testID="safe-area-view">{children}</View>
+        ),
+        useSafeAreaInsets: () => ({ top: 0, left: 0, right: 0, bottom: 0 }),
+    };
+});
+
 jest.mock('expo-router', () => ({
     useRouter: jest.fn(),
 }));
@@ -19,10 +32,18 @@ jest.mock('@expo/vector-icons', () => {
 });
 
 jest.mock('react-native-gesture-handler', () => {
+    const React = require('react');
     const { View } = require('react-native');
+
+    const MockSwipeable = React.forwardRef(({ children }: any, ref: any) => (
+        <View testID="swipeable-mock">{children}</View>
+    ));
+    MockSwipeable.displayName = 'Swipeable';
+
     return {
-        Swipeable: ({ children }: any) => <View testID="swipeable-mock">{children}</View>,
+        Swipeable: MockSwipeable,
         TouchableOpacity: require('react-native').TouchableOpacity,
+        GestureHandlerRootView: ({ children }: any) => <View>{children}</View>,
     };
 });
 
@@ -60,6 +81,11 @@ describe('OverviewScreen (index.tsx)', () => {
             deleteExpense: mockDeleteExpense,
             isInitialized: true,
         });
+    });
+
+    it('matches the snapshot (Overview UI)', () => {
+        render(<OverviewScreen />);
+        expect(screen.toJSON()).toMatchSnapshot();
     });
 
     it('initialisiert den Store, wenn noch nicht initialisiert', () => {

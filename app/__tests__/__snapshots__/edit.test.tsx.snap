@@ -1,0 +1,946 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditScreen (edit/[id].tsx) matches the snapshot in Edit Mode 1`] = `
+<RNCSafeAreaView
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "backgroundColor": "#000000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "paddingBottom": 40,
+          "paddingHorizontal": 20,
+        }
+      }
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "marginVertical": 20,
+            }
+          }
+        >
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "minWidth": 60,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              testID="icon-chevron-back"
+            />
+          </View>
+          <Text
+            style={
+              {
+                "color": "#ffffff",
+                "fontFamily": "serif",
+                "fontSize": 28,
+                "fontStyle": "italic",
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Details
+          </Text>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "minWidth": 60,
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "textAlign": "right",
+                }
+              }
+            >
+              Cancel
+            </Text>
+          </View>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": false,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={true}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "#000",
+              "borderColor": "#ffffff",
+              "borderRadius": 20,
+              "borderWidth": 1,
+              "height": 200,
+              "marginBottom": 30,
+              "opacity": 1,
+              "overflow": "hidden",
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <View
+              testID="icon-camera-outline"
+            />
+            <Text
+              style={
+                {
+                  "color": "#333",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "marginTop": 8,
+                }
+              }
+            >
+              Tap to take photo
+            </Text>
+          </View>
+          <View
+            style={
+              {
+                "backgroundColor": "rgba(0,0,0,0.6)",
+                "borderRadius": 20,
+                "bottom": 10,
+                "padding": 8,
+                "position": "absolute",
+                "right": 10,
+              }
+            }
+          >
+            <View
+              testID="icon-camera"
+            />
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "gap": 20,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              NAME
+            </Text>
+            <TextInput
+              editable={true}
+              onChangeText={[Function]}
+              placeholder="Expense Name"
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  false,
+                ]
+              }
+              value="Coop"
+            />
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              PRICE ($)
+            </Text>
+            <TextInput
+              editable={true}
+              keyboardType="decimal-pad"
+              onChangeText={[Function]}
+              placeholder="0.00"
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  false,
+                ]
+              }
+              value="15.00"
+            />
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              CATEGORY
+            </Text>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": false,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={true}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#ffffff",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "paddingVertical": 12,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#ffffff",
+                      "fontSize": 18,
+                    },
+                    false,
+                    false,
+                  ]
+                }
+              >
+                Lebensmittel
+              </Text>
+              <View
+                testID="icon-chevron-down"
+              />
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              DESCRIPTION
+            </Text>
+            <TextInput
+              editable={true}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={[Function]}
+              placeholder="Additional details..."
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  {
+                    "minHeight": 80,
+                    "textAlignVertical": "top",
+                  },
+                  false,
+                ]
+              }
+              value="Snacks"
+            />
+          </View>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "alignItems": "center",
+                "backgroundColor": "#ffffff",
+                "borderRadius": 12,
+                "marginTop": 30,
+                "opacity": 1,
+                "paddingVertical": 18,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#000000",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                }
+              }
+            >
+              SAVE CHANGES
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RNCSafeAreaView>
+`;
+
+exports[`EditScreen (edit/[id].tsx) matches the snapshot in View Mode 1`] = `
+<RNCSafeAreaView
+  edges={
+    {
+      "bottom": "additive",
+      "left": "additive",
+      "right": "additive",
+      "top": "additive",
+    }
+  }
+  style={
+    {
+      "backgroundColor": "#000000",
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "paddingBottom": 40,
+          "paddingHorizontal": 20,
+        }
+      }
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <View
+          style={
+            {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between",
+              "marginVertical": 20,
+            }
+          }
+        >
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "minWidth": 60,
+                "opacity": 1,
+              }
+            }
+          >
+            <View
+              testID="icon-chevron-back"
+            />
+          </View>
+          <Text
+            style={
+              {
+                "color": "#ffffff",
+                "fontFamily": "serif",
+                "fontSize": 28,
+                "fontStyle": "italic",
+                "fontWeight": "bold",
+              }
+            }
+          >
+            Details
+          </Text>
+          <View
+            accessibilityState={
+              {
+                "busy": undefined,
+                "checked": undefined,
+                "disabled": undefined,
+                "expanded": undefined,
+                "selected": undefined,
+              }
+            }
+            accessibilityValue={
+              {
+                "max": undefined,
+                "min": undefined,
+                "now": undefined,
+                "text": undefined,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              {
+                "minWidth": 60,
+                "opacity": 1,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 16,
+                  "fontWeight": "bold",
+                  "textAlign": "right",
+                }
+              }
+            >
+              Edit
+            </Text>
+          </View>
+        </View>
+        <View
+          accessibilityState={
+            {
+              "busy": undefined,
+              "checked": undefined,
+              "disabled": true,
+              "expanded": undefined,
+              "selected": undefined,
+            }
+          }
+          accessibilityValue={
+            {
+              "max": undefined,
+              "min": undefined,
+              "now": undefined,
+              "text": undefined,
+            }
+          }
+          accessible={true}
+          collapsable={false}
+          focusable={false}
+          onClick={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            {
+              "backgroundColor": "#000",
+              "borderColor": "#ffffff",
+              "borderRadius": 20,
+              "borderWidth": 1,
+              "height": 200,
+              "marginBottom": 30,
+              "opacity": 1,
+              "overflow": "hidden",
+              "width": "100%",
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <View
+              testID="icon-camera-outline"
+            />
+            <Text
+              style={
+                {
+                  "color": "#333",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "marginTop": 8,
+                }
+              }
+            >
+              Tap to take photo
+            </Text>
+          </View>
+        </View>
+        <View
+          style={
+            {
+              "gap": 20,
+            }
+          }
+        >
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              NAME
+            </Text>
+            <TextInput
+              editable={false}
+              onChangeText={[Function]}
+              placeholder="Expense Name"
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  {
+                    "borderColor": "#222",
+                    "color": "#888",
+                  },
+                ]
+              }
+              value="Coop"
+            />
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              PRICE ($)
+            </Text>
+            <TextInput
+              editable={false}
+              keyboardType="decimal-pad"
+              onChangeText={[Function]}
+              placeholder="0.00"
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  {
+                    "borderColor": "#222",
+                    "color": "#888",
+                  },
+                ]
+              }
+              value="15.00"
+            />
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              CATEGORY
+            </Text>
+            <View
+              accessibilityState={
+                {
+                  "busy": undefined,
+                  "checked": undefined,
+                  "disabled": true,
+                  "expanded": undefined,
+                  "selected": undefined,
+                }
+              }
+              accessibilityValue={
+                {
+                  "max": undefined,
+                  "min": undefined,
+                  "now": undefined,
+                  "text": undefined,
+                }
+              }
+              accessible={true}
+              collapsable={false}
+              focusable={false}
+              onClick={[Function]}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                {
+                  "alignItems": "center",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#222",
+                  "flexDirection": "row",
+                  "justifyContent": "space-between",
+                  "opacity": 1,
+                  "paddingVertical": 12,
+                }
+              }
+            >
+              <Text
+                style={
+                  [
+                    {
+                      "color": "#ffffff",
+                      "fontSize": 18,
+                    },
+                    false,
+                    {
+                      "color": "#888",
+                    },
+                  ]
+                }
+              >
+                Lebensmittel
+              </Text>
+            </View>
+          </View>
+          <View
+            style={
+              {
+                "gap": 8,
+              }
+            }
+          >
+            <Text
+              style={
+                {
+                  "color": "#4ea8de",
+                  "fontSize": 12,
+                  "fontWeight": "bold",
+                  "letterSpacing": 1,
+                }
+              }
+            >
+              DESCRIPTION
+            </Text>
+            <TextInput
+              editable={false}
+              multiline={true}
+              numberOfLines={4}
+              onChangeText={[Function]}
+              placeholder="Additional details..."
+              placeholderTextColor="#444"
+              style={
+                [
+                  {
+                    "borderBottomWidth": 1,
+                    "borderColor": "#ffffff",
+                    "color": "#ffffff",
+                    "fontSize": 18,
+                    "paddingVertical": 10,
+                  },
+                  {
+                    "minHeight": 80,
+                    "textAlignVertical": "top",
+                  },
+                  {
+                    "borderColor": "#222",
+                    "color": "#888",
+                  },
+                ]
+              }
+              value="Snacks"
+            />
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RNCSafeAreaView>
+`;
