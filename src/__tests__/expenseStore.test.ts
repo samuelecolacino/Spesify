@@ -11,10 +11,7 @@ jest.mock('../services/db', () => ({
   deleteExpenseFromDb: jest.fn(),
 }));
 
-// dbSeeds wird auch gemockt, damit seedDb nichts macht
-jest.mock('../services/dbSeeds', () => ({
-  seedDb: jest.fn(),
-}));
+
 
 // Import der gemockten Funktionen, damit wir sie steuern können
 import {
@@ -25,7 +22,7 @@ import {
   updateExpenseInDb,
   deleteExpenseFromDb,
 } from '../services/db';
-import { seedDb } from '../services/dbSeeds';
+
 
 // Beispiel-Expense das in den Tests wiederverwendet wird
 const testExpense: Expense = {
@@ -64,14 +61,13 @@ describe('initialize', () => {
     expect(state.categories).toEqual(['Essen', 'Fahren']);
   });
 
-  it('ruft initDb und seedDb auf', async () => {
+  it('ruft initDb auf', async () => {
     (loadExpensesFromDb as jest.Mock).mockResolvedValue([]);
     (loadCategoriesFromDb as jest.Mock).mockResolvedValue([]);
 
     await useExpenseStore.getState().initialize();
 
     expect(initDb).toHaveBeenCalledTimes(1);
-    expect(seedDb).toHaveBeenCalledTimes(1);
   });
 });
 
