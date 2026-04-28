@@ -34,7 +34,7 @@ jest.mock('expo-router', () => ({
 jest.mock('react-native-get-random-values', () => ({}));
 
 // Mock uuid
-jest.mock('uuid', () => ({
+jest.mock('react-native-uuid', () => ({
   v4: () => 'test-uuid-456',
 }));
 
@@ -127,5 +127,14 @@ describe('CreateScreen', () => {
         'Bitte Name, Preis und Kategorie ausfüllen.'
     );
     expect(mockAddExpense).not.toHaveBeenCalled();
+  });
+
+  it('renders correctly and matches snapshot', () => {
+    const { toJSON } = render(
+      <SafeAreaProvider>
+        <CreateScreen />
+      </SafeAreaProvider>
+    );
+    expect(toJSON()).toMatchSnapshot();
   });
 });

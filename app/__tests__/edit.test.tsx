@@ -20,20 +20,6 @@ jest.mock('@expo/vector-icons', () => {
     return {Ionicons: (props: any) => <View testID={`icon-${props.name}`}/>};
 });
 
-jest.mock('@react-native-picker/picker', () => {
-    const { View } = require('react-native');
-
-    const Picker = ({ children }: any) => <View testID="mock-picker">{children}</View>;
-    Picker.displayName = 'Picker';
-
-    const PickerItem = ({ label }: any) => <View testID={`picker-item-${label}`} />;
-    PickerItem.displayName = 'PickerItem';
-
-    Picker.Item = PickerItem;
-
-    return { Picker };
-});
-
 jest.spyOn(Alert, 'alert');
 
 describe('EditScreen (edit/[id].tsx)', () => {
