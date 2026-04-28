@@ -9,12 +9,14 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     Platform,
-    Alert
+    Alert,
+    Modal,
+    Pressable,
+    FlatList
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { Picker } from '@react-native-picker/picker';
 
 import { useExpenseStore } from '@/src/store/expenseStore';
 
@@ -34,6 +36,8 @@ export default function EditScreen() {
     const [category, setCategory] = useState('');
     const [description, setDescription] = useState('');
     const [imageURI, setImageURI] = useState<string | null>(null);
+
+    const [showCategoryPicker, setShowCategoryPicker] = useState(false);
 
     useEffect(() => {
         const expense = expenses.find((e) => e.id === id);
@@ -115,7 +119,7 @@ export default function EditScreen() {
                     <TouchableOpacity
                         style={styles.imageContainer}
                         onPress={openCamera}
-                        disabled={!isEditing} // Optional: only allow camera if in edit mode
+                        disabled={!isEditing}
                         activeOpacity={0.7}
                     >
                         {imageURI ? (
@@ -161,22 +165,24 @@ export default function EditScreen() {
                             />
                         </View>
 
+                        {/* Updated Category Dropdown */}
                         <View style={styles.inputGroup}>
                             <Text style={styles.label}>CATEGORY</Text>
-                            <View style={[styles.pickerWrapper, !isEditing && styles.inputDisabled]}>
-                                <Picker
-                                    enabled={isEditing}
-                                    selectedValue={category}
-                                    onValueChange={(val) => setCategory(val)}
-                                    style={styles.picker}
-                                    dropdownIconColor="#ffffff"
-                                >
-                                    <Picker.Item label="Select Category" value="" color="#666" />
-                                    {categories.map((cat) => (
-                                        <Picker.Item key={cat} label={cat} value={cat} color={Platform.OS === 'ios' ? '#ffffff' : '#000000'} />
-                                    ))}
-                                </Picker>
-                            </View>
+                            <TouchableOpacity
+                                style={[styles.pickerTrigger, !isEditing && styles.pickerTriggerDisabled]}
+                                onPress={() => isEditing && setShowCategoryPicker(true)}
+                                activeOpacity={0.7}
+                                disabled={!isEditing}
+                            >
+                                <Text style={[
+                                    styles.pickerText,
+                                    !category && styles.pickerPlaceholder,
+                                    !isEditing && styles.textDisabled
+                                ]}>
+                                    {category || 'Select Category'}
+                                </Text>
+                                {isEditing && <Ionicons name="chevron-down" size={20} color="#ffffff" />}
+                            </TouchableOpacity>
                         </View>
 
                         <View style={styles.inputGroup}>
@@ -202,19 +208,55 @@ export default function EditScreen() {
 
                 </ScrollView>
             </KeyboardAvoidingView>
+
+            {/* Category Bottom Sheet Modal */}
+            <Modal
+                visible={showCategoryPicker}
+                transparent
+                animationType="slide"
+                onRequestClose={() => setShowCategoryPicker(false)}
+            >
+                <Pressable style={styles.modalOverlay} onPress={() => setShowCategoryPicker(false)}>
+                    <View style={styles.modalSheet}>
+                        <View style={styles.modalHandle} />
+                        <Text style={styles.modalTitle}>Category</Text>
+                        <FlatList
+                            data={categories}
+                            keyExtractor={(item) => item}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity
+                                    style={[
+                                        styles.modalOption,
+                                        category === item && styles.modalOptionSelected,
+                                    ]}
+                                    onPress={() => {
+                                        setCategory(item);
+                                        setShowCategoryPicker(false);
+                                    }}
+                                    activeOpacity={0.6}
+                                >
+                                    <Text
+                                        style={[
+                                            styles.modalOptionText,
+                                            category === item && styles.modalOptionTextSelected,
+                                        ]}
+                                    >
+                                        {item}
+                                    </Text>
+                                    {category === item && (
+                                        <Ionicons name="checkmark" size={20} color="#4ea8de" />
+                                    )}
+                                </TouchableOpacity>
+                            )}
+                        />
+                    </View>
+                </Pressable>
+            </Modal>
         </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
-    cameraOverlay: {
-        position: 'absolute',
-        bottom: 10,
-        right: 10,
-        backgroundColor: 'rgba(0,0,0,0.6)',
-        padding: 8,
-        borderRadius: 20,
-    },
     container: {
         flex: 1,
         backgroundColor: '#000000',
@@ -271,6 +313,14 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
     },
+    cameraOverlay: {
+        position: 'absolute',
+        bottom: 10,
+        right: 10,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        padding: 8,
+        borderRadius: 20,
+    },
     form: {
         gap: 20,
     },
@@ -294,13 +344,8 @@ const styles = StyleSheet.create({
         borderColor: '#222',
         color: '#888',
     },
-    pickerWrapper: {
-        borderBottomWidth: 1,
-        borderColor: '#ffffff',
-    },
-    picker: {
-        color: '#ffffff',
-        marginLeft: -10, // Adjusting for picker internal padding
+    textDisabled: {
+        color: '#888',
     },
     textArea: {
         minHeight: 80,
@@ -317,5 +362,72 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: 16,
         fontWeight: 'bold',
+    },
+
+    /* ── Category Picker Styles ── */
+    pickerTrigger: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottomWidth: 1,
+        borderColor: '#ffffff',
+        paddingVertical: 12,
+    },
+    pickerTriggerDisabled: {
+        borderColor: '#222',
+    },
+    pickerText: {
+        color: '#ffffff',
+        fontSize: 18,
+    },
+    pickerPlaceholder: {
+        color: '#444',
+    },
+
+    /* ── Category Modal Styles ── */
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        justifyContent: 'flex-end',
+    },
+    modalSheet: {
+        backgroundColor: '#1C1C1E',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        paddingBottom: 36,
+        maxHeight: '50%',
+    },
+    modalHandle: {
+        width: 36,
+        height: 4,
+        borderRadius: 2,
+        backgroundColor: 'rgba(255,255,255,0.3)',
+        alignSelf: 'center',
+        marginTop: 10,
+        marginBottom: 12,
+    },
+    modalTitle: {
+        color: '#fff',
+        fontSize: 17,
+        fontWeight: '700',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+    modalOption: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingVertical: 14,
+        paddingHorizontal: 24,
+    },
+    modalOptionSelected: {
+        backgroundColor: 'rgba(255,255,255,0.08)',
+    },
+    modalOptionText: {
+        color: '#fff',
+        fontSize: 16,
+    },
+    modalOptionTextSelected: {
+        fontWeight: '600',
     },
 });
