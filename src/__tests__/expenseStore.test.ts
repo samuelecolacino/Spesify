@@ -12,7 +12,6 @@ jest.mock('../services/db', () => ({
 }));
 
 
-
 // Import der gemockten Funktionen, damit wir sie steuern können
 import {
   initDb,
@@ -22,7 +21,6 @@ import {
   updateExpenseInDb,
   deleteExpenseFromDb,
 } from '../services/db';
-
 
 // Beispiel-Expense das in den Tests wiederverwendet wird
 const testExpense: Expense = {
