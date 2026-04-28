@@ -32,6 +32,12 @@
     "plugins": [
       "expo-router",
       [
+        "expo-camera",
+        {
+          "cameraPermission": "Spesify benötigt die Kamera, damit du deine Spesenbelege fotografieren kannst."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash.png",
