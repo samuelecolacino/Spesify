@@ -1,0 +1,125 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`addExpenseToDb – Snapshots runAsync-Aufruf (mit imageURI) entspricht dem Snapshot 1`] = `
+[
+  "INSERT INTO expenses (id, name, description, price, category, date, imageURI) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  [
+    "1",
+    "Migros Mittagessen",
+    "Sandwich",
+    "8.50",
+    "Essen",
+    "2026-04-24",
+    "file://foto.jpg",
+  ],
+]
+`;
+
+exports[`addExpenseToDb – Snapshots runAsync-Aufruf (ohne imageURI) entspricht dem Snapshot 1`] = `
+[
+  "INSERT INTO expenses (id, name, description, price, category, date, imageURI) VALUES (?, ?, ?, ?, ?, ?, ?)",
+  [
+    "1",
+    "Migros Mittagessen",
+    "Sandwich",
+    "8.50",
+    "Essen",
+    "2026-04-24",
+    null,
+  ],
+]
+`;
+
+exports[`deleteExpenseFromDb – Snapshots runAsync-Aufruf entspricht dem Snapshot 1`] = `
+[
+  "DELETE FROM expenses WHERE id = ?",
+  [
+    "1",
+  ],
+]
+`;
+
+exports[`initDb – Snapshots SQL-Statement entspricht dem Snapshot 1`] = `
+"
+    PRAGMA journal_mode = WAL;
+    CREATE TABLE IF NOT EXISTS expenses (
+      id TEXT PRIMARY KEY NOT NULL,
+      name TEXT NOT NULL,
+      description TEXT,
+      price TEXT NOT NULL,
+      category TEXT NOT NULL,
+      date TEXT NOT NULL,
+      imageURI TEXT
+    );
+    CREATE TABLE IF NOT EXISTS categories (
+      name TEXT PRIMARY KEY NOT NULL
+    );
+    INSERT OR IGNORE INTO categories (name) VALUES 
+      ('Parkieren'), 
+      ('Essen'), 
+      ('ÖV'), 
+      ('Fahren');
+  "
+`;
+
+exports[`loadCategoriesFromDb – Snapshots Kategorien-Liste entspricht dem Snapshot 1`] = `
+[
+  "Essen",
+  "Fahren",
+  "ÖV",
+  "Parkieren",
+]
+`;
+
+exports[`loadExpensesFromDb – Snapshots Rückgabewert mit einem Expense entspricht dem Snapshot 1`] = `
+[
+  {
+    "category": "Essen",
+    "date": "2026-04-24",
+    "description": "Sandwich",
+    "id": "1",
+    "imageURI": undefined,
+    "name": "Migros Mittagessen",
+    "price": "8.50",
+  },
+]
+`;
+
+exports[`loadExpensesFromDb – Snapshots Rückgabewert mit mehreren Expenses entspricht dem Snapshot 1`] = `
+[
+  {
+    "category": "Essen",
+    "date": "2026-04-25",
+    "description": "Getränke",
+    "id": "2",
+    "name": "Coop Einkauf",
+    "price": "12.00",
+  },
+  {
+    "category": "Essen",
+    "date": "2026-04-24",
+    "description": "Sandwich",
+    "id": "1",
+    "imageURI": undefined,
+    "name": "Migros Mittagessen",
+    "price": "8.50",
+  },
+]
+`;
+
+exports[`loadExpensesFromDb – Snapshots leeres Array entspricht dem Snapshot 1`] = `[]`;
+
+exports[`updateExpenseInDb – Snapshots runAsync-Aufruf entspricht dem Snapshot 1`] = `
+[
+  "UPDATE expenses SET name = ?, description = ?, price = ?, category = ?, date = ?, imageURI = ? WHERE id = ?",
+  [
+    "Coop Einkauf",
+    "Sandwich",
+    "15.00",
+    "Essen",
+    "2026-04-24",
+    null,
+    "1",
+  ],
+]
+`;
